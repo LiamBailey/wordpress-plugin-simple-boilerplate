@@ -35,7 +35,22 @@ class Plugin_Boilerplate {
 		if (!$this->have_required_plugins())
 			return;
 		load_plugin_textdomain($this->textdomain, false, dirname(plugin_basename(__FILE__)) . '/languages');
+		spl_autoload_register(array($this,'autoload'));
+       	$this->init();
 	}
+
+	private function init() {
+
+	}
+
+	/* Autoload Classes */
+   	function autoload($class) {
+       	$class = strtolower(str_replace("_","-",$class));
+       	$class_file = untrailingslashit(plugin_dir_path(__FILE__)) ."/includes/{$class}.php";
+       	if (file_exists($class_file)) {
+           	include_once($class_file);
+       	}
+   	}
 
 	public static function instance() {
 		if (is_null(self::$_instance)) {
