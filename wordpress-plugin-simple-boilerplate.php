@@ -46,7 +46,7 @@ class Plugin_Boilerplate {
 	/* Autoload Classes */
    	function autoload($class) {
        	$class = strtolower(str_replace("_","-",$class));
-       	$class_file = untrailingslashit(plugin_dir_path(__FILE__)) ."/includes/{$class}.php";
+       	$class_file = untrailingslashit(plugin_dir_path(__FILE__)) ."/includes/class-{$class}.php";
        	if (file_exists($class_file)) {
            	include_once($class_file);
        	}
